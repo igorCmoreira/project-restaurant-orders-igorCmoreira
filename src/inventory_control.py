@@ -21,6 +21,8 @@ class InventoryControl:
     def __init__(self):
         self.min_inventory = dict(self.MINIMUM_INVENTORY)
         self.list_orders = TrackOrders()
+        self.ingredients = set()
+        self.available_dishes = set()
 
     def add_new_order(self, customer, order, day):
         self.list_orders.add_new_order(customer, order, day)
@@ -36,3 +38,16 @@ class InventoryControl:
                 self.MINIMUM_INVENTORY[item] - self.min_inventory[item]
             ) for item in self.min_inventory
         }
+
+    def ingredients_available(self):
+        for item in self.min_inventory:
+            if self.min_inventory[item] > 0:
+                self.ingredients.add(item)
+
+    def get_available_dishes(self):
+        self.ingredients_available()
+        menu = self.INGREDIENTS.items()
+        for dishe, ing in menu:
+            if self.ingredients.issuperset(ing):
+                self.available_dishes.add(dishe)
+        return self.available_dishes
