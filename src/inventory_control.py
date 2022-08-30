@@ -1,5 +1,4 @@
 class InventoryControl:
-    #init
     INGREDIENTS = {
         'hamburguer': ['pao', 'carne', 'queijo'],
         'pizza': ['massa', 'queijo', 'molho'],
